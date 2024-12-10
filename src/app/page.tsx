@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { category } from "./constant/Category";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { album } from "./constant/Album";
 import { iconShortcut } from "./constant/IconShortcut";
 import { cf } from "./constant/Cf";
@@ -25,7 +25,15 @@ export default function Home() {
   const [navigation, setNavigation] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const size = window.innerWidth > 1450 ? 230 : 180;
+  const [size, setSize] = useState(180);
+  useEffect(() => {
+    const updateSize = () => {
+      setSize(window.innerWidth > 1450 ? 230 : 180);
+    };
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % cf.length);
@@ -38,10 +46,10 @@ export default function Home() {
   const mainContent = () => {
     if (navigation === 0) {
       return (
-        <div className="w-full h-[80vh] flex items-center justify-center overflow-hidden">
+        <div className="relative w-full h-[80vh] flex items-center justify-center overflow-hidden">
           <GrPrevious
             size={50}
-            className="mr-[20px] cursor-pointer text-gray-400 hover:text-navigation transition-all duration-300"
+            className="absolute top-30 left-[15px] cursor-pointer text-white hover:text-navigation transition-all duration-300 z-20"
             onClick={handlePrev}
           />
           <div className="relative w-full h-full transition-all duration-500">
@@ -54,7 +62,7 @@ export default function Home() {
                 {cf[currentIndex].description2}
               </p>
             </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10 opacity-50"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10 opacity-70"></div>
             <Image
               src={cf[currentIndex].image}
               alt={cf[currentIndex].name}
@@ -69,7 +77,7 @@ export default function Home() {
           </div>
           <GrNext
             size={50}
-            className="ml-[20px] cursor-pointer text-gray-400 hover:text-navigation transition-all duration-300"
+            className="absolute top-30 right-[15px] cursor-pointer text-gray-400 hover:text-navigation transition-all duration-300 z-20"
             onClick={handleNext}
           />
         </div>
