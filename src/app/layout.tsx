@@ -2,17 +2,26 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
 
-const pretendardBold = localFont({
-  src: "./fonts/Pretendard-Bold.otf",
-  variable: "--font-pretendard-bold",
-});
-const pretendardMedium = localFont({
-  src: "./fonts/Pretendard-Medium.otf",
-  variable: "--font-pretendard-medium",
-});
-const pretendardRegular = localFont({
-  src: "./fonts/Pretendard-Regular.otf",
-  variable: "--font-pretendard-regular",
+const pretendardFont = localFont({
+  src: [
+    {
+      path: "./fonts/Pretendard-Bold.otf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Pretendard-Medium.otf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Pretendard-Regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-pretendard",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -27,11 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${pretendardBold.variable} ${pretendardMedium.variable} ${pretendardRegular.variable}`}
-      >
-        {children}
-      </body>
+      <body className={pretendardFont.variable}>{children}</body>
     </html>
   );
 }
