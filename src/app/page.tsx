@@ -9,9 +9,23 @@ import { iconShortcut } from "./constant/IconShortcut";
 import { cf } from "./constant/Cf";
 import { GrPrevious, GrNext } from "react-icons/gr";
 
+const colorClasses = {
+  "digital-single": "text-digital-single",
+  "single-1": "text-single-1",
+  "mini-1": "text-mini-1",
+  "single-2": "text-single-2",
+  "mini-2": "text-mini-2",
+  "my-love": "text-mylove",
+  "digital-single-2": "text-digital-single-2",
+  "digital-single-3": "text-digital-single-3",
+  "digital-single-4": "text-digital-single-4",
+};
+
 export default function Home() {
   const [navigation, setNavigation] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const size = window.innerWidth > 1450 ? 230 : 180;
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % cf.length);
@@ -49,7 +63,7 @@ export default function Home() {
               width={1000}
               height={1000}
             />
-            <div className="absolute bottom-[90px] right-[50px] bg-white w-[200px] h-[50px] flex items-center justify-center font-bold text-[18px] rounded-full">
+            <div className="absolute bottom-[90px] right-[50px] bg-white w-[200px] h-[50px] flex items-center justify-center font-bold text-[18px] rounded-full z-20">
               <Link href={cf[currentIndex].url}>자세한 정보 보러가기</Link>
             </div>
           </div>
@@ -68,11 +82,17 @@ export default function Home() {
               <Image
                 src={item.image}
                 alt={item.name}
-                width={230}
-                height={200}
+                width={size}
+                height={size}
               />
               <p className="mt-[10px] text-[18px]">{item.name}</p>
-              <p className={`text-${item.color} text-[15px]`}>{item.album}</p>
+              <p
+                className={`${
+                  colorClasses[item.color as keyof typeof colorClasses]
+                } text-[15px]`}
+              >
+                {item.album}
+              </p>
               <div className="flex justify-end mt-[20px] mr-[40px]">
                 <p className="text-gray-400 text-[13px]">{item.date}</p>
               </div>
@@ -94,7 +114,9 @@ export default function Home() {
         <div className="flex absolute gap-[50px] left-[80px] top-[75px]">
           {category.map((item) => (
             <p
-              className={`${navigation === item.id ? "text-navigation" : "text-gray-400"} cursor-pointer font-bold transition-all duration-500 hover:text-navigation`}
+              className={`${
+                navigation === item.id ? "text-navigation" : "text-gray-400"
+              } cursor-pointer font-bold transition-all duration-500 hover:text-navigation`}
               key={item.id}
               onClick={() => setNavigation(item.id)}
             >

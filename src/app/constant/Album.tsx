@@ -4,7 +4,7 @@ export const album = [
     album: "OST",
     name: "My Love",
     image: "/images/mylove.webp",
-    color: "mylove",
+    color: "myl-ove",
     date: "2020. 09. 22.",
     link: "",
   },
