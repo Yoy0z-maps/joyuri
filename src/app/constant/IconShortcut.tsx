@@ -1,6 +1,12 @@
 export const iconShortcut = [
   {
     id: 0,
+    name: "Youtube",
+    image: "/images/youtube.png",
+    link: "https://www.youtube.com/@joyuri_official",
+  },
+  {
+    id: 1,
     name: "Spotify",
     image: "/images/sportify.png",
     link: "https://open.spotify.com/artist/3LFFf4EpKn2krneZ9vozyz",
@@ -19,12 +25,6 @@ export const iconShortcut = [
   },
   {
     id: 4,
-    name: "Youtube",
-    image: "/images/youtube.png",
-    link: "https://www.youtube.com/@joyuri_official",
-  },
-  {
-    id: 5,
     name: "X",
     image: "/images/x.png",
     link: "https://x.com/joyuri_official",

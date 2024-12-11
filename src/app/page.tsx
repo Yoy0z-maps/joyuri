@@ -8,6 +8,7 @@ import { album } from "./constant/Album";
 import { iconShortcut } from "./constant/IconShortcut";
 import { cf } from "./constant/Cf";
 import { GrPrevious, GrNext } from "react-icons/gr";
+import Calendar from "./components/Calendar";
 
 const colorClasses = {
   "digital-single": "text-digital-single",
@@ -62,7 +63,7 @@ export default function Home() {
                 {cf[currentIndex].description2}
               </p>
             </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10 opacity-70"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10 opacity-50"></div>
             <Image
               src={cf[currentIndex].image}
               alt={cf[currentIndex].name}
@@ -77,7 +78,7 @@ export default function Home() {
           </div>
           <GrNext
             size={50}
-            className="absolute top-30 right-[15px] cursor-pointer text-gray-400 hover:text-navigation transition-all duration-300 z-20"
+            className="absolute top-30 right-[15px] cursor-pointer text-white hover:text-navigation transition-all duration-300 z-20"
             onClick={handleNext}
           />
         </div>
@@ -111,9 +112,15 @@ export default function Home() {
     } else if (navigation === 2) {
       return <div>DRAMA</div>;
     } else if (navigation === 3) {
-      return <div>CALENDAR</div>;
+      return (
+        <div className="w-full h-full bg-white flex items-center justify-center">
+          <Calendar />
+        </div>
+      );
     }
   };
+
+  useEffect(() => {}, [currentIndex]);
 
   return (
     <div className="overflow-hidden w-screen h-screen">
